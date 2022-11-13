@@ -1,0 +1,51 @@
+{
+  "@@locale": "en",
+  "appName": "App Name",
+  "easyWayToManageYourEWallet": "Easy way to manage your e-wallet",
+  "manageYourEveryPennyAndTransactionWithEase": "Manage your every penny and transaction with ease",
+  "enterToYourWallet": "Enter to your wallet",
+  "importWallet": "Import Wallet",
+  "createWallet": "Create Wallet",
+  "newPassword": "New Password",
+  "show": "Show",
+  "hide": "Hide",
+  "confirmPassword": "Confirm Password",
+  "password": "Password",
+  "mustBeAtLeastCharacters": "Must be at least {num} characters",
+  "@mustBeAtLeastCharacters": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      }
+    }
+  },
+  "iUnderstandThatAppNameCannotRecoverThisPasswordForMe": "I understand that {appName} cannot recover this password for me.",
+  "@iUnderstandThatAppNameCannotRecoverThisPasswordForMe": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "createPassword": "Create password",
+  "dontGiveThisPrivateKeyToAnyone": "Don’t give this privatekey to anyone!",
+  "getStarted": "Get started",
+  "privateKey": "Private key",
+  "walletAddedSuccessfully": "Wallet added successfully",
+  "thisPasswordWillUnlockYourWalletOnlyOnThisDevice": "This password will unlock your wallet only on this device.",
+  "welcomeBack": "Welcome Back!",
+  "logInWithBiometrics": "Log In With Biometrics",
+  "signIn": "Sign In",
+  "depositCrypto": "Deposit Crypto",
+  "withdrawCrypto": "Withdraw Crypto",
+  "exchangeCrypto": "Exchange Crypto",
+  "createNewAccount": "Create New Account",
+  "importAnAccount": "Import an Account",
+  "signInWithBiometrics": "Sign in with Biometrics ?",
+  "tokens": "TOKENS",
+  "nfts": "NFTs",
+  "dontSeeYourToken": "Don't see your token?",
+  "importTokens": "Import tokens",
+  "dontSeeYourNFT": "Don't see your nft?",
+  "importNFTs": "Import nfts"
+}
