@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:re_web/utils/utils.dart';
+import 'package:re_web/views/home_detail_screen/home_detail_screen.dart';
 import 'package:re_web/views/home_screen/home_screen.dart';
 
 class AppRoute {
@@ -10,6 +12,11 @@ class AppRoute {
       case HomeScreen.id:
         return CupertinoPageRoute(
           builder: (_) => const HomeScreen(),
+          settings: settings,
+        );
+      case HomeDetailScreen.id:
+        return CupertinoPageRoute(
+          builder: (_) => const HomeDetailScreen(),
           settings: settings,
         );
       default:
@@ -30,3 +37,20 @@ class AppRoute {
     );
   }
 }
+
+final GoRouter router = GoRouter(
+  routes: <GoRoute>[
+    GoRoute(
+      path: HomeScreen.id,
+      builder: (BuildContext context, GoRouterState state) {
+        return const HomeScreen();
+      },
+    ),
+    GoRoute(
+      path: HomeDetailScreen.id,
+      builder: (BuildContext context, GoRouterState state) {
+        return const HomeDetailScreen();
+      },
+    ),
+  ],
+);

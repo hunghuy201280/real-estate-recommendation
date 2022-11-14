@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:re_web/routes/app_route.dart';
 import 'package:re_web/view_models/app_bloc/app_bloc.dart';
-import 'package:re_web/views/home_screen/home_screen.dart';
+import 'package:re_web/views/common_widgets/footer.dart';
 
 import 'generated/l10n.dart';
 
@@ -55,7 +55,7 @@ class _ReAppState extends State<ReApp> {
         builder: (context, child) {
           return child!;
         },
-        child: MaterialApp(
+        child: MaterialApp.router(
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -65,14 +65,18 @@ class _ReAppState extends State<ReApp> {
           supportedLocales: S.delegate.supportedLocales,
           locale: context.watch<AppBloc>().state.locale,
           debugShowCheckedModeBanner: false,
-          initialRoute: HomeScreen.id,
-          onGenerateRoute: AppRoute.onGenerateRoute,
+          routerConfig: router,
           builder: (context, widget) {
             if (widget == null) {
               debugPrint("Material builder: widget is null");
               return const SizedBox();
             }
-            return widget;
+            return Column(
+              children: [
+                Expanded(child: widget),
+                const Footer(),
+              ],
+            );
           },
         ),
       ),
