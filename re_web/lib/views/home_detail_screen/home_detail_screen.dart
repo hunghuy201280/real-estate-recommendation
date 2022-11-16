@@ -38,6 +38,7 @@ class _ImageAndContact extends StatelessWidget {
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 "CONTACT",
@@ -67,14 +68,13 @@ class _ImageAndContact extends StatelessWidget {
               24.verticalSpace,
               SizedBox(
                 width: 398.w,
-                child: CommonButton(
+                child: const CommonButton(
                   title: "SEND",
                   backgroundColor: AppColors.kColor2,
                   color: AppColors.kColor1,
                 ),
               )
             ],
-            mainAxisSize: MainAxisSize.min,
           ),
         )
       ],
