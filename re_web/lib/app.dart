@@ -45,41 +45,44 @@ class _ReAppState extends State<ReApp> {
     //         );
     //       }),
     // );
-    return GestureDetector(
-      onTap: () {
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      child: ScreenUtilInit(
-        //Put Figma size here
-        designSize: const Size(1920, 1080),
-        builder: (context, child) {
-          return child!;
+    return Builder(builder: (context) {
+      return GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
         },
-        child: MaterialApp.router(
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          locale: context.watch<AppBloc>().state.locale,
-          debugShowCheckedModeBanner: false,
-          routerConfig: router,
-          builder: (context, widget) {
-            if (widget == null) {
-              debugPrint("Material builder: widget is null");
-              return const SizedBox();
-            }
-            return Column(
-              children: [
-                Expanded(child: widget),
-                const Footer(),
-              ],
-            );
+        child: ScreenUtilInit(
+          //Put Figma size here
+          designSize: const Size(1920, 1080),
+          builder: (context, child) {
+            return child!;
           },
+
+          child: MaterialApp.router(
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            locale: context.watch<AppBloc>().state.locale,
+            debugShowCheckedModeBanner: false,
+            routerConfig: router,
+            builder: (context, widget) {
+              if (widget == null) {
+                debugPrint("Material builder: widget is null");
+                return const SizedBox();
+              }
+              return Column(
+                children: [
+                  Expanded(child: widget),
+                  const Footer(),
+                ],
+              );
+            },
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

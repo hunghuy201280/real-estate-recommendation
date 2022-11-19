@@ -4,6 +4,7 @@ import 'package:re_web/configs/color_config.dart';
 import 'package:re_web/configs/text_config.dart';
 import 'package:re_web/utils/extensions.dart';
 import 'package:re_web/views/common_widgets/common_button.dart';
+import 'package:re_web/views/home_detail_screen/widgets/left_column.dart';
 import 'package:re_web/views/home_screen/widgets/home_item_widget.dart';
 
 class HomeDetailScreen extends StatelessWidget {
@@ -34,7 +35,7 @@ class _ImageAndContact extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _Images(),
+        const LeftColumn(),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,6 +71,7 @@ class _ImageAndContact extends StatelessWidget {
                 width: 398.w,
                 child: const CommonButton(
                   title: "SEND",
+                  padding: EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: AppColors.kColor2,
                   color: AppColors.kColor1,
                 ),
@@ -111,103 +113,6 @@ class CommonFormField extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _Images extends StatelessWidget {
-  const _Images({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox.fromSize(
-          size: Size(871.w, 609.w),
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    AppColors.kColor2.withOpacity(0.3),
-                    BlendMode.darken,
-                  ),
-                  child: Image.network(
-                    "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 30.w,
-                left: 60.w,
-                child: const CommonButton(
-                  title: "For rent",
-                  color: AppColors.kColor1,
-                  backgroundColor: AppColors.kColor2,
-                ),
-              ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Material(
-                    color: Colors.transparent,
-                    clipBehavior: Clip.hardEdge,
-                    child: InkResponse(
-                      radius: 32.w,
-                      onTap: () {},
-                      child: Icon(
-                        Icons.arrow_back_ios_outlined,
-                        color: AppColors.kColor1,
-                        size: 56.w,
-                      ),
-                    ),
-                  ).withPadding(EdgeInsets.only(right: 16.w)),
-                ),
-              ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Material(
-                    color: Colors.transparent,
-                    clipBehavior: Clip.hardEdge,
-                    child: InkResponse(
-                      radius: 32.w,
-                      onTap: () {},
-                      child: Icon(
-                        Icons.arrow_forward_ios_sharp,
-                        color: AppColors.kColor1,
-                        size: 56.w,
-                      ),
-                    ),
-                  ).withPadding(EdgeInsets.only(right: 16.w)),
-                ),
-              ),
-            ],
-          ),
-        ),
-        16.verticalSpace,
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (int i = 0; i < 4; i++)
-              Material(
-                clipBehavior: Clip.hardEdge,
-                borderRadius: BorderRadius.circular(8.w),
-                child: Image.network(
-                  "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
-                  fit: BoxFit.cover,
-                  width: 144.w,
-                  height: 101.w,
-                ),
-              ).withPadding(EdgeInsets.only(right: 24.w))
-          ],
-        )
-      ],
     );
   }
 }
