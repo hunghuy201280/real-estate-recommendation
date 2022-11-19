@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:re_web/utils/utils.dart';
 import 'package:re_web/views/home_detail_screen/home_detail_screen.dart';
 import 'package:re_web/views/home_screen/home_screen.dart';
+import 'package:re_web/views/login_screen/login_screen.dart';
 
 class AppRoute {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -44,6 +45,12 @@ final GoRouter router = GoRouter(
       path: HomeScreen.id,
       builder: (BuildContext context, GoRouterState state) {
         return const HomeScreen();
+      },
+    ),
+    GoRoute(
+      path: LoginScreen.id,
+      builder: (BuildContext context, GoRouterState state) {
+        return const LoginScreen();
       },
     ),
     GoRoute(

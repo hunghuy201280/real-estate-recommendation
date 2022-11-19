@@ -13,15 +13,25 @@ class HomeDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const _Header(),
-          16.verticalSpace,
-          const _TopRow(),
-          16.verticalSpace,
-          const _ImageAndContact(),
-        ],
+      body: Scrollbar(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _Header(),
+              16.verticalSpace,
+              const _TopRow(),
+              16.verticalSpace,
+              const _ImageAndContact(),
+              64.verticalSpace,
+              Text(
+                "In case the content of the posting is found to be incorrect, please notify and provide information to the Administration Board at Hotline 19001881 for the fastest and most timely support.",
+                style: TextConfigs.kText24_2,
+              ).withPadding(EdgeInsets.symmetric(horizontal: 224.w)),
+              64.verticalSpace,
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -89,17 +99,20 @@ class CommonFormField extends StatelessWidget {
     Key? key,
     required this.hint,
     this.width,
-    this.maxLines,
+    this.maxLines = 1,
+    this.obscure = false,
   }) : super(key: key);
   final String hint;
   final double? width;
   final int? maxLines;
+  final bool obscure;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
       child: TextFormField(
+        obscureText: obscure,
         maxLines: maxLines,
         decoration: InputDecoration(
           hintStyle: TextConfigs.kText18_3,
@@ -224,10 +237,8 @@ class _Header extends StatelessWidget {
             color: AppColors.kColor2,
           ).withPadding(EdgeInsets.all(16.w)),
           const Spacer(),
-          const CommonButton(title: 'Sign up'),
-          16.horizontalSpace,
           const CommonButton(
-            title: 'Login',
+            title: 'Log out',
             backgroundColor: AppColors.kColor2,
             color: AppColors.kColor1,
           ),

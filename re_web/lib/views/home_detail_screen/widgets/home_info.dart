@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:re_web/configs/text_config.dart';
+import 'package:re_web/utils/extensions.dart';
 
 class HomeInfo extends StatelessWidget {
   const HomeInfo({Key? key, required this.title, required this.values})
@@ -11,17 +13,20 @@ class HomeInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: title
-              .map(
-                (e) => Text(
-                  e,
-                  style: TextConfigs.kText24_3,
-                ),
-              )
-              .toList(),
+        SizedBox(
+          width: 240.w,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: title
+                .map(
+                  (e) => Text(
+                    e,
+                    style: TextConfigs.kText24_3,
+                  ).withPadding(EdgeInsets.only(bottom: 24.w)),
+                )
+                .toList(),
+          ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +36,7 @@ class HomeInfo extends StatelessWidget {
                 (e) => Text(
                   e,
                   style: TextConfigs.kText24_2,
-                ),
+                ).withPadding(EdgeInsets.only(bottom: 24.w)),
               )
               .toList(),
         ),

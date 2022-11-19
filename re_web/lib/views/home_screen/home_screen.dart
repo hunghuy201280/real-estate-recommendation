@@ -7,7 +7,7 @@ import 'package:re_web/views/home_screen/widgets/home_header.dart';
 import 'package:re_web/views/home_screen/widgets/home_item_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const id = "/";
+  static const id = "/home";
   const HomeScreen({Key? key}) : super(key: key);
 
   static HomeScreen get instance {

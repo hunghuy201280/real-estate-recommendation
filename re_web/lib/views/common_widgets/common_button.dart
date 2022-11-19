@@ -9,15 +9,17 @@ class CommonButton extends StatelessWidget {
     this.color = AppColors.kColor2,
     this.backgroundColor,
     this.padding,
+    this.onTap,
   }) : super(key: key);
   final String title;
   final Color color;
   final Color? backgroundColor;
   final EdgeInsets? padding;
+  final GestureTapCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: onTap,
       style: OutlinedButton.styleFrom(
         backgroundColor: backgroundColor,
         padding: padding,

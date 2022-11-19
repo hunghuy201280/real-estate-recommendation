@@ -16,8 +16,8 @@ class LeftColumn extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        _Images(
+      children: [
+        const _Images(
           urls: [
             "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
             "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
@@ -25,7 +25,8 @@ class LeftColumn extends StatelessWidget {
             "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
           ],
         ),
-        HomeInfo(
+        64.verticalSpace,
+        const HomeInfo(
           title: [
             "Room quantity",
             "Has elevator",
