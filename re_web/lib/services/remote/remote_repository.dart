@@ -1,25 +1,20 @@
-import 'package:dio/dio.dart';
-import 'package:re_web/configs/app_config.dart';
-import 'package:re_web/constants/endpoints.dart';
 import 'package:injectable/injectable.dart';
+import 'package:re_web/configs/app_config.dart';
+import 'package:re_web/models/house/house.dart';
+import 'package:re_web/services/api_end_point.dart';
+import 'package:re_web/services/api_remote.dart';
 
 @singleton
 class RemoteRepository {
   static const baseUrl = AppConfigs.kServerUri;
-  Future<Response> test() async {
-    Dio _dio = Dio();
-    Response response = await _dio.get("$baseUrl${AppEndpoint.test}");
-    return response;
-  }
+  final ApiRemote client;
 
-  Future<Response> verifyWallet({required String privateKey}) async {
-    Dio _dio = Dio();
-    Response response = await _dio.post(
-      "$baseUrl${AppEndpoint.verifyWallet}",
-      data: {
-        "privateKey": privateKey,
-      },
-    );
-    return response;
+  RemoteRepository(this.client);
+
+  Future<List<House>> getHouses() async {
+    final response = await client.get(ApiEndPoint.kGetHouses);
+    return (response.data["data"] as List)
+        .map((e) => House.fromJson(e))
+        .toList();
   }
 }
