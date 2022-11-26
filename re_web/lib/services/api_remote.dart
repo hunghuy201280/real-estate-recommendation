@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -29,14 +26,14 @@ class ApiRemote {
         ),
       );
 
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      // You can verify the certificate here
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-
-      return client;
-    };
+    // (dio.httpClientAdapter as HttpClientAdapter).onHttpClientCreate =
+    //     (client) {
+    //   // You can verify the certificate here
+    //   client.badCertificateCallback =
+    //       (X509Certificate cert, String host, int port) => true;
+    //
+    //   return client;
+    // };
 
     return dio;
   }

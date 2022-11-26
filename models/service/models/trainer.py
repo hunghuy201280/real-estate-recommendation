@@ -10,10 +10,22 @@ import numpy as np
 
 class Trainer(object):
     def __init__(self,home_data,events_data):
-        self.home_df=pd.DataFrame(home_data)
-        self.events_df=pd.DataFrame(events_data)
-        self.home_df.drop(columns=["_id"],inplace=True)
-        self.events_df.drop(columns=["_id"],inplace=True)
+        home_feats=[
+                "item_id",
+                'deposit',
+                'monthly_rent',
+                'district_uuid',
+                'room_qty',
+                'unit_area',
+                'has_elevator',
+                'building_floor_count',
+                'unit_floor',
+                'has_storage_area',
+                'property_age'
+            ]
+        event_feats=["item_id","user_id","event_type","create_timestamp"]
+        self.home_df=pd.DataFrame(home_data,columns=home_feats)
+        self.events_df=pd.DataFrame(events_data,columns=event_feats)
         self.home_orig=self.home_df.copy()
         self.n_top_items=10
         print(f"Init trainer with houses {self.home_df.describe()}")
@@ -40,7 +52,7 @@ class Trainer(object):
             pred_points=np.append(pred_points,pred)
         top_item_indexes=np.argpartition(pred_points, -self.n_top_items)[-self.n_top_items:]
         top_item_indexes_sorted=top_item_indexes[np.argsort(pred_points[top_item_indexes])][::-1]
-        print("Top points: ",pred_points[top_item_indexes_sorted])
+        #print("Top points: ",pred_points[top_item_indexes_sorted])
         return self.home_orig_cleaned.iloc[top_item_indexes_sorted].item_id
 
     def fit(self):

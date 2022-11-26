@@ -1,11 +1,22 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:re_web/configs/color_config.dart';
 import 'package:re_web/configs/text_config.dart';
+import 'package:re_web/constants/events_type.dart';
+import 'package:re_web/di/dependency_injection.dart';
+import 'package:re_web/models/prefs/configspref.dart';
+import 'package:re_web/services/remote/remote_provider.dart';
 import 'package:re_web/utils/extensions.dart';
+import 'package:re_web/view_models/home_detail_cubit/home_detail_cubit.dart';
 import 'package:re_web/views/common_widgets/common_button.dart';
+import 'package:re_web/views/common_widgets/common_form_field.dart';
 import 'package:re_web/views/home_detail_screen/widgets/left_column.dart';
 import 'package:re_web/views/home_screen/widgets/home_item_widget.dart';
+import 'package:re_web/views/login_screen/login_screen.dart';
 
 class HomeDetailScreen extends StatelessWidget {
   const HomeDetailScreen({Key? key}) : super(key: key);
@@ -42,6 +53,8 @@ class _ImageAndContact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final item = context.read<HomeDetailCubit>().state!;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -79,9 +92,15 @@ class _ImageAndContact extends StatelessWidget {
               24.verticalSpace,
               SizedBox(
                 width: 398.w,
-                child: const CommonButton(
+                child: CommonButton(
+                  onTap: () {
+                    getIt.get<RemoteProvider>().logEvent(
+                          eventName: EventsType.kMeetingRequestNew,
+                          itemId: item.itemId,
+                        );
+                  },
                   title: "SEND",
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: AppColors.kColor2,
                   color: AppColors.kColor1,
                 ),
@@ -94,47 +113,13 @@ class _ImageAndContact extends StatelessWidget {
   }
 }
 
-class CommonFormField extends StatelessWidget {
-  const CommonFormField({
-    Key? key,
-    required this.hint,
-    this.width,
-    this.maxLines = 1,
-    this.obscure = false,
-  }) : super(key: key);
-  final String hint;
-  final double? width;
-  final int? maxLines;
-  final bool obscure;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      child: TextFormField(
-        obscureText: obscure,
-        maxLines: maxLines,
-        decoration: InputDecoration(
-          hintStyle: TextConfigs.kText18_3,
-          hintText: hint,
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.kColor2,
-              width: 30.w,
-            ),
-            borderRadius: BorderRadius.circular(8.w),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _TopRow extends StatelessWidget {
   const _TopRow({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final item = context.read<HomeDetailCubit>().state!;
+    final price =
+        ((item.monthlyRent > 0 ? item.monthlyRent : item.deposit) / 100);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -148,7 +133,7 @@ class _TopRow extends StatelessWidget {
             ).withPadding(EdgeInsets.only(left: 224.w)),
             8.verticalSpace,
             Text(
-              "Street Diervel, New Jersey",
+              item.itemId,
               style: TextConfigs.kText24_3_700,
             ).withPadding(EdgeInsets.only(left: 224.w)),
           ],
@@ -157,7 +142,7 @@ class _TopRow extends StatelessWidget {
           children: [
             24.horizontalSpace,
             Text(
-              "\$1200",
+              "\$${price.decimalFormat}",
               style: TextConfigs.kText36_2,
             ),
             Container(
@@ -166,8 +151,8 @@ class _TopRow extends StatelessWidget {
               color: AppColors.kColor2,
               margin: EdgeInsets.symmetric(horizontal: 32.w),
             ),
-            const VerticalText(
-              top: '72',
+            VerticalText(
+              top: '${item.unitArea}',
               bottom: "m2",
               color: AppColors.kColor2,
               bottomColor: AppColors.kColor3,
@@ -178,8 +163,8 @@ class _TopRow extends StatelessWidget {
               color: AppColors.kColor2,
               margin: EdgeInsets.symmetric(horizontal: 32.w),
             ),
-            const VerticalText(
-              top: '300',
+            VerticalText(
+              top: (price / max(item.unitArea, 1)).toStringAsFixed(2),
               bottom: "\$/m2",
               color: AppColors.kColor2,
               bottomColor: AppColors.kColor3,
@@ -237,7 +222,12 @@ class _Header extends StatelessWidget {
             color: AppColors.kColor2,
           ).withPadding(EdgeInsets.all(16.w)),
           const Spacer(),
-          const CommonButton(
+          CommonButton(
+            onTap: () {
+              getIt.get<ConfigsPref>().setUserId(null);
+              GoRouter.of(context).replace(LoginScreen.id);
+            },
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             title: 'Log out',
             backgroundColor: AppColors.kColor2,
             color: AppColors.kColor1,

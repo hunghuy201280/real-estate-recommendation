@@ -30,6 +30,7 @@ class _$HouseTearOff {
       String districtUuid = "",
       int roomQty = 0,
       double unitArea = 0,
+      double unitFloor = 0,
       bool hasElevator = false,
       int buildingFloorCount = 0,
       bool hasStorageArea = false,
@@ -42,6 +43,7 @@ class _$HouseTearOff {
       districtUuid: districtUuid,
       roomQty: roomQty,
       unitArea: unitArea,
+      unitFloor: unitFloor,
       hasElevator: hasElevator,
       buildingFloorCount: buildingFloorCount,
       hasStorageArea: hasStorageArea,
@@ -66,6 +68,7 @@ mixin _$House {
   String get districtUuid => throw _privateConstructorUsedError;
   int get roomQty => throw _privateConstructorUsedError;
   double get unitArea => throw _privateConstructorUsedError;
+  double get unitFloor => throw _privateConstructorUsedError;
   bool get hasElevator => throw _privateConstructorUsedError;
   int get buildingFloorCount => throw _privateConstructorUsedError;
   bool get hasStorageArea => throw _privateConstructorUsedError;
@@ -88,6 +91,7 @@ abstract class $HouseCopyWith<$Res> {
       String districtUuid,
       int roomQty,
       double unitArea,
+      double unitFloor,
       bool hasElevator,
       int buildingFloorCount,
       bool hasStorageArea,
@@ -111,6 +115,7 @@ class _$HouseCopyWithImpl<$Res> implements $HouseCopyWith<$Res> {
     Object? districtUuid = freezed,
     Object? roomQty = freezed,
     Object? unitArea = freezed,
+    Object? unitFloor = freezed,
     Object? hasElevator = freezed,
     Object? buildingFloorCount = freezed,
     Object? hasStorageArea = freezed,
@@ -145,6 +150,10 @@ class _$HouseCopyWithImpl<$Res> implements $HouseCopyWith<$Res> {
           ? _value.unitArea
           : unitArea // ignore: cast_nullable_to_non_nullable
               as double,
+      unitFloor: unitFloor == freezed
+          ? _value.unitFloor
+          : unitFloor // ignore: cast_nullable_to_non_nullable
+              as double,
       hasElevator: hasElevator == freezed
           ? _value.hasElevator
           : hasElevator // ignore: cast_nullable_to_non_nullable
@@ -178,6 +187,7 @@ abstract class _$HouseCopyWith<$Res> implements $HouseCopyWith<$Res> {
       String districtUuid,
       int roomQty,
       double unitArea,
+      double unitFloor,
       bool hasElevator,
       int buildingFloorCount,
       bool hasStorageArea,
@@ -202,6 +212,7 @@ class __$HouseCopyWithImpl<$Res> extends _$HouseCopyWithImpl<$Res>
     Object? districtUuid = freezed,
     Object? roomQty = freezed,
     Object? unitArea = freezed,
+    Object? unitFloor = freezed,
     Object? hasElevator = freezed,
     Object? buildingFloorCount = freezed,
     Object? hasStorageArea = freezed,
@@ -236,6 +247,10 @@ class __$HouseCopyWithImpl<$Res> extends _$HouseCopyWithImpl<$Res>
           ? _value.unitArea
           : unitArea // ignore: cast_nullable_to_non_nullable
               as double,
+      unitFloor: unitFloor == freezed
+          ? _value.unitFloor
+          : unitFloor // ignore: cast_nullable_to_non_nullable
+              as double,
       hasElevator: hasElevator == freezed
           ? _value.hasElevator
           : hasElevator // ignore: cast_nullable_to_non_nullable
@@ -268,6 +283,7 @@ class _$_House implements _House {
       this.districtUuid = "",
       this.roomQty = 0,
       this.unitArea = 0,
+      this.unitFloor = 0,
       this.hasElevator = false,
       this.buildingFloorCount = 0,
       this.hasStorageArea = false,
@@ -299,6 +315,9 @@ class _$_House implements _House {
   final double unitArea;
   @JsonKey()
   @override
+  final double unitFloor;
+  @JsonKey()
+  @override
   final bool hasElevator;
   @JsonKey()
   @override
@@ -312,7 +331,7 @@ class _$_House implements _House {
 
   @override
   String toString() {
-    return 'House(id: $id, itemId: $itemId, deposit: $deposit, monthlyRent: $monthlyRent, districtUuid: $districtUuid, roomQty: $roomQty, unitArea: $unitArea, hasElevator: $hasElevator, buildingFloorCount: $buildingFloorCount, hasStorageArea: $hasStorageArea, propertyAge: $propertyAge)';
+    return 'House(id: $id, itemId: $itemId, deposit: $deposit, monthlyRent: $monthlyRent, districtUuid: $districtUuid, roomQty: $roomQty, unitArea: $unitArea, unitFloor: $unitFloor, hasElevator: $hasElevator, buildingFloorCount: $buildingFloorCount, hasStorageArea: $hasStorageArea, propertyAge: $propertyAge)';
   }
 
   @override
@@ -329,6 +348,7 @@ class _$_House implements _House {
                 .equals(other.districtUuid, districtUuid) &&
             const DeepCollectionEquality().equals(other.roomQty, roomQty) &&
             const DeepCollectionEquality().equals(other.unitArea, unitArea) &&
+            const DeepCollectionEquality().equals(other.unitFloor, unitFloor) &&
             const DeepCollectionEquality()
                 .equals(other.hasElevator, hasElevator) &&
             const DeepCollectionEquality()
@@ -349,6 +369,7 @@ class _$_House implements _House {
       const DeepCollectionEquality().hash(districtUuid),
       const DeepCollectionEquality().hash(roomQty),
       const DeepCollectionEquality().hash(unitArea),
+      const DeepCollectionEquality().hash(unitFloor),
       const DeepCollectionEquality().hash(hasElevator),
       const DeepCollectionEquality().hash(buildingFloorCount),
       const DeepCollectionEquality().hash(hasStorageArea),
@@ -374,6 +395,7 @@ abstract class _House implements House {
       String districtUuid,
       int roomQty,
       double unitArea,
+      double unitFloor,
       bool hasElevator,
       int buildingFloorCount,
       bool hasStorageArea,
@@ -395,6 +417,8 @@ abstract class _House implements House {
   int get roomQty;
   @override
   double get unitArea;
+  @override
+  double get unitFloor;
   @override
   bool get hasElevator;
   @override

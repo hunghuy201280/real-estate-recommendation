@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
 import 'package:re_web/routes/app_route.dart';
+import 'package:re_web/utils/custom_scroll_behavior.dart';
 import 'package:re_web/view_models/app_bloc/app_bloc.dart';
+import 'package:re_web/view_models/bloc_wrapper.dart';
 import 'package:re_web/views/common_widgets/footer.dart';
 
 import 'generated/l10n.dart';
@@ -45,44 +46,46 @@ class _ReAppState extends State<ReApp> {
     //         );
     //       }),
     // );
-    return Builder(builder: (context) {
-      return GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        child: ScreenUtilInit(
-          //Put Figma size here
-          designSize: const Size(1920, 1080),
-          builder: (context, child) {
-            return child!;
+    return BlocWrapper(
+      child: Builder(builder: (context) {
+        return GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
           },
-
-          child: MaterialApp.router(
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            locale: context.watch<AppBloc>().state.locale,
-            debugShowCheckedModeBanner: false,
-            routerConfig: router,
-            builder: (context, widget) {
-              if (widget == null) {
-                debugPrint("Material builder: widget is null");
-                return const SizedBox();
-              }
-              return Column(
-                children: [
-                  Expanded(child: widget),
-                  const Footer(),
-                ],
-              );
+          child: ScreenUtilInit(
+            //Put Figma size here
+            designSize: const Size(1920, 1080),
+            builder: (context, child) {
+              return child!;
             },
+            child: MaterialApp.router(
+              scrollBehavior: MyCustomScrollBehavior(),
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              locale: context.watch<AppBloc>().state.locale,
+              debugShowCheckedModeBanner: false,
+              routerConfig: router,
+              builder: (context, widget) {
+                if (widget == null) {
+                  debugPrint("Material builder: widget is null");
+                  return const SizedBox();
+                }
+                return Column(
+                  children: [
+                    Expanded(child: widget),
+                    const Footer(),
+                  ],
+                );
+              },
+            ),
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 }

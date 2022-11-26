@@ -23,6 +23,7 @@ class CommonButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         backgroundColor: backgroundColor,
         padding: padding,
+        foregroundColor: AppColors.kColor1,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: color,

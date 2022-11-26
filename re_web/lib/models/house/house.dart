@@ -14,6 +14,7 @@ class House with _$House {
     @Default("") String districtUuid,
     @Default(0) int roomQty,
     @Default(0) double unitArea,
+    @Default(0) double unitFloor,
     @Default(false) bool hasElevator,
     @Default(0) int buildingFloorCount,
     @Default(false) bool hasStorageArea,

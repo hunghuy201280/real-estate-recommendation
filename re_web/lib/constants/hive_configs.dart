@@ -2,11 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
 class HiveConfigs {
   Future<void> initializeHiveConfigs() async {
+    HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: HydratedStorage.webStorageDirectory,
+    );
     await Hive.initFlutter();
 
     final key = await getSecureKey();

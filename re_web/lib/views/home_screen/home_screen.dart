@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:re_web/configs/color_config.dart';
-import 'package:re_web/configs/text_config.dart';
 import 'package:re_web/utils/extensions.dart';
 import 'package:re_web/views/home_screen/widgets/home_header.dart';
-import 'package:re_web/views/home_screen/widgets/home_item_widget.dart';
+import 'package:re_web/views/home_screen/widgets/home_recommendation.dart';
+import 'package:re_web/views/home_screen/widgets/top_houses.dart';
 
 class HomeScreen extends StatefulWidget {
   static const id = "/home";
+
   const HomeScreen({Key? key}) : super(key: key);
 
   static HomeScreen get instance {
@@ -44,31 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     ),
-                    Text(
-                      "Recommend for you",
-                      style: TextConfigs.kText48_2,
-                    ).withPadding(
-                      EdgeInsets.only(left: 80.w, top: 40.w, bottom: 16.w),
-                    ),
-                    Text(
-                      "Listings we think you’ll love",
-                      style: TextConfigs.kText32_2,
-                    ).withPadding(
-                      EdgeInsets.only(left: 80.w, bottom: 32.w),
-                    ),
-                    SizedBox(
-                      height: 377.w,
-                      child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return const HomeItemWidget();
-                        },
-                        scrollDirection: Axis.horizontal,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return 76.horizontalSpace;
-                        },
-                        itemCount: 10,
-                      ),
-                    ).withPadding(EdgeInsets.symmetric(horizontal: 80.w)),
+                    const TopHouses(),
+                    const HomeRecommendation(),
                     200.verticalSpace,
                   ],
                 ),

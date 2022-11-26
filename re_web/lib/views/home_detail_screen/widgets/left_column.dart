@@ -1,18 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:re_web/configs/color_config.dart';
+import 'package:re_web/configs/text_config.dart';
 import 'package:re_web/utils/extensions.dart';
+import 'package:re_web/view_models/home_detail_cubit/home_detail_cubit.dart';
 import 'package:re_web/views/home_detail_screen/widgets/home_info.dart';
 
 class LeftColumn extends StatelessWidget {
   const LeftColumn({
     Key? key,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final item = context.read<HomeDetailCubit>().state!;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,8 +30,8 @@ class LeftColumn extends StatelessWidget {
           ],
         ),
         64.verticalSpace,
-        const HomeInfo(
-          title: [
+        HomeInfo(
+          title: const [
             "Room quantity",
             "Has elevator",
             "Has storage",
@@ -35,11 +39,12 @@ class LeftColumn extends StatelessWidget {
             "Property age",
           ],
           values: [
-            "5",
-            "Yes",
-            "Yes",
-            "5",
-            "5",
+            item.roomQty.toString(),
+            item.hasElevator ? "Yes" : "No",
+            item.hasStorageArea ? "Yes" : "No",
+            (item.unitFloor == 0 ? item.buildingFloorCount : item.unitFloor)
+                .toString(),
+            item.propertyAge.toString(),
           ],
         ),
       ],
@@ -60,6 +65,7 @@ class _ImagesState extends State<_Images> {
 
   @override
   Widget build(BuildContext context) {
+    final item = context.read<HomeDetailCubit>().state!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -87,19 +93,42 @@ class _ImagesState extends State<_Images> {
             ),
             itemCount: widget.urls.length,
             itemBuilder: (BuildContext context, int index, int realIndex) {
-              return Material(
-                borderRadius: BorderRadius.circular(8),
-                clipBehavior: Clip.hardEdge,
-                child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    AppColors.kColor2.withOpacity(0.3),
-                    BlendMode.darken,
+              return Stack(
+                children: [
+                  Positioned.fill(
+                    child: Material(
+                      borderRadius: BorderRadius.circular(8),
+                      clipBehavior: Clip.hardEdge,
+                      child: ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                          AppColors.kColor2.withOpacity(0.3),
+                          BlendMode.darken,
+                        ),
+                        child: Image.network(
+                          widget.urls[index],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Image.network(
-                    widget.urls[index],
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                  if (item.monthlyRent != 0)
+                    Positioned(
+                      top: 24,
+                      left: 24,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.kColor2,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16.w, vertical: 8.w),
+                        child: Text(
+                          "For rent",
+                          style: TextConfigs.kText20_1,
+                        ),
+                      ),
+                    ),
+                ],
               );
             },
           ),

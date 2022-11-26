@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 extension StringExt on String {
   String get assetImage => "assets/images/$this.png";
@@ -23,9 +24,13 @@ extension StringExt on String {
     }
     final cutIndex = shortForLength ~/ 2;
     final remainingChar = shortForLength - cutIndex;
-    return substring(0, cutIndex) +
-        "..." +
-        substring(length - remainingChar + 3);
+    return "${substring(0, cutIndex)}...${substring(length - remainingChar + 3)}";
+  }
+}
+
+extension NumExt on num {
+  String get decimalFormat {
+    return NumberFormat.decimalPattern().format(this).replaceAll(",", ".");
   }
 }
 
