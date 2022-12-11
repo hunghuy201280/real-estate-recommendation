@@ -39,7 +39,7 @@ class HomeItemWidget extends StatelessWidget {
             children: [
               Positioned.fill(
                 child: Image.network(
-                  "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
+                  houseImagesCached[item.id]!.first,
                   fit: BoxFit.cover,
                 ),
               ),

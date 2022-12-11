@@ -3,6 +3,7 @@ import 'package:re_web/configs/app_config.dart';
 import 'package:re_web/models/house/house.dart';
 import 'package:re_web/services/api_end_point.dart';
 import 'package:re_web/services/api_remote.dart';
+import 'package:re_web/utils/extensions.dart';
 
 @singleton
 class RemoteRepository {
@@ -13,16 +14,31 @@ class RemoteRepository {
 
   Future<List<House>> getHouses() async {
     final response = await client.get(ApiEndPoint.kGetHouses);
-    return (response.data["data"] as List)
-        .map((e) => House.fromJson(e))
-        .toList();
+
+    return (response.data["data"] as List).map((e) {
+      final item = House.fromJson(e);
+      houseImagesCached[item.id] = [
+        housesImages.random,
+        housesImages.random,
+        housesImages.random,
+        housesImages.random,
+      ];
+      return item;
+    }).toList();
   }
 
   Future<List<House>> getTopHouses() async {
     final response = await client.get(ApiEndPoint.kGetTopHouses);
-    return (response.data["data"] as List)
-        .map((e) => House.fromJson(e))
-        .toList();
+    return (response.data["data"] as List).map((e) {
+      final item = House.fromJson(e);
+      houseImagesCached[item.id] = [
+        housesImages.random,
+        housesImages.random,
+        housesImages.random,
+        housesImages.random
+      ];
+      return item;
+    }).toList();
   }
 
   Future<String> login(
@@ -47,8 +63,15 @@ class RemoteRepository {
 
   Future<List<House>> getRecommendation(String userId) async {
     final response = await client.get(ApiEndPoint.kGetRecommendation(userId));
-    return (response.data["data"] as List)
-        .map((e) => House.fromJson(e))
-        .toList();
+    return (response.data["data"] as List).map((e) {
+      final item = House.fromJson(e);
+      houseImagesCached[item.id] = [
+        housesImages.random,
+        housesImages.random,
+        housesImages.random,
+        housesImages.random
+      ];
+      return item;
+    }).toList();
   }
 }

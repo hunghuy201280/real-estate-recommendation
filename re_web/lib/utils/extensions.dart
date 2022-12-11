@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:dio/dio.dart';
@@ -56,5 +57,16 @@ extension WidgetExt on Widget {
       padding: edgeInsets,
       child: this,
     );
+  }
+}
+
+extension ListExt<T> on List<T> {
+  T get random {
+    var list = this;
+
+    final random = Random();
+
+    var element = list[random.nextInt(list.length)];
+    return element;
   }
 }

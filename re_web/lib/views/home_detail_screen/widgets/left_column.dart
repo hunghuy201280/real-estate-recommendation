@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:re_web/configs/color_config.dart';
 import 'package:re_web/configs/text_config.dart';
+import 'package:re_web/models/house/house.dart';
 import 'package:re_web/utils/extensions.dart';
 import 'package:re_web/view_models/home_detail_cubit/home_detail_cubit.dart';
 import 'package:re_web/views/home_detail_screen/widgets/home_info.dart';
@@ -21,13 +22,8 @@ class LeftColumn extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _Images(
-          urls: [
-            "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
-            "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
-            "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
-            "https://img.onmanorama.com/content/dam/mm/en/lifestyle/decor/images/2022/1/27/4-cent-trivandrum-home-view.jpg",
-          ],
+        _Images(
+          urls: houseImagesCached[item.id]!,
         ),
         64.verticalSpace,
         HomeInfo(

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:re_web/configs/color_config.dart';
 import 'package:re_web/configs/text_config.dart';
 import 'package:re_web/views/home_screen/widgets/home_search_field.dart';
-import 'package:re_web/views/home_screen/widgets/home_slider.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class HomeHeader extends StatefulWidget {
@@ -69,22 +68,6 @@ class _HomeHeaderState extends State<HomeHeader> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const HomeSearchField(),
-                        Row(
-                          children: <Widget>[
-                            const HomeSlider(
-                              min: 1000,
-                              max: 10000,
-                              initialStart: 1200,
-                              initialEnd: 2000,
-                            ),
-                            const HomeSlider(
-                              min: 50,
-                              max: 2000,
-                              initialStart: 75,
-                              initialEnd: 125,
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),

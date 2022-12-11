@@ -164,7 +164,9 @@ class _TopRow extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 32.w),
             ),
             VerticalText(
-              top: (price / max(item.unitArea, 1)).toStringAsFixed(2),
+              top: (price / max(item.unitArea, 1))
+                  .toStringAsFixed(2)
+                  .replaceAll(".", ","),
               bottom: "\$/m2",
               color: AppColors.kColor2,
               bottomColor: AppColors.kColor3,

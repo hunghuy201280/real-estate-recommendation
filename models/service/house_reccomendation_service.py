@@ -1,4 +1,6 @@
-from jobs  import recommend_job
+
+from worker import worker
 
 if __name__ == '__main__':
-    recommend_job.recommend()
+    worker.run()
+    # recommend_job.recommend()
